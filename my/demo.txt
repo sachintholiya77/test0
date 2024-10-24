@@ -1,0 +1,3 @@
+This is ajax request demo
+we are fetching data from the text file
+and we have saved the data in xampp folder
