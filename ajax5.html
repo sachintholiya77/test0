@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax DB</title>
+</head>
+<body>
+    <button id="db">
+        Get Data
+    </button>
+    <div id="fetch"></div>
+    <div id="FetchData"></div>
+<script>
+    document.getElementById('db').addEventListener('click',getData);
+
+    function getData(){
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('GET','db.php',true);
+      
+
+        // xhr.onload = function(){
+        //     if(this.status==200){
+        //         const userData = JSON.parse(this.responseText);
+        //         output = "";
+        //         for(i in userData){
+        //             output+= `<tr><td>${userData[i].id}</td><td>${userData[i].name}</td><td>${userData[i].email}</td></tr>`;
+        //         }
+        //         document.getElementById('row').innerHTML = output;
+        //     }
+        // }
+
+        xhr.onload = function(){
+            if(this.status==200){
+                console.log("Data Is loaded");
+                // document.getElementById('fetch').innerHTML = this.responseText;
+                document.getElementById('FetchData').innerHTML = this.responseText;
+            }
+        }
+
+        
+        xhr.send();
+    }
+</script>
+</body>
+
+</html>
+

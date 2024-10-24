@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax 3</title>
+
+    <style>
+        img{
+            height: 30px;
+            width: 30px;
+            border-radius: 100px;
+        }
+        ul{
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            background-color: #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <button id="git">Load Git</button>
+    <h1>Github Users</h1>
+    <div id="users"></div>
+
+    <script>
+        document.getElementById('git').addEventListener('click', gitData);
+
+        function gitData(){
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET','https://api.github.com/users',true);
+
+            xhr.onload = function(){
+                if(this.status == 200){
+                    let users = JSON.parse(this.responseText);
+                    console.log(users);
+
+                    let output = "";
+                    for(let i in users){
+                        output+= `<div class="user"> 
+                            <ul>
+                                <li> <img src="${users[i].avatar_url}"> </li>
+                                 <li> ${users[i].login} </li>
+                                 <li>${users[i].id}</li>
+                             </ul>   
+                            </div>`;
+                    }
+                    document.getElementById('users').innerHTML = output;
+
+                }
+            }
+
+            xhr.send();
+        }
+    </script>
+</body>
+</html>

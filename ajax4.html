@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax 4</title>
+</head>
+<body>
+    <h1>Php</h1>
+    <h1>Ajax Form</h1>
+    <form method="GET" id="getForm">
+        <input type="text" name="name" id="name1" placeholder="Enter Name" required>
+        <input type="submit" value="Submit">
+    </form>
+    <form method="POST" id="postForm">
+        <input type="text" name="name" id="name2" placeholder="Enter Name" required>
+        <input type="submit" value="Submit">
+    </form>
+    <!-- <p id="dt"></p> -->
+     <div class="dt"></div>
+
+    <script>
+       document.getElementById('getForm').addEventListener('submit',mydata);
+       document.getElementById('postForm').addEventListener('submit',postData);
+
+       function mydata(e){
+            e.preventDefault();
+
+            let name = document.getElementById('name1').value;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET','data.php?name='+name,true);
+
+            xhr.onload = function(){
+                if(this.status==200){
+                    console.log(this.responseText);
+                }
+            }
+
+            xhr.send();
+
+
+       }
+
+       function postData(e){
+        e.preventDefault();
+            let name = document.getElementById('name2').value;
+            let params = "name="+name;
+
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('POST','data.php',true);
+            xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+            xhr.onload = function(){
+                if(this.status==200){
+                }
+            }
+
+            xhr.send(params);
+
+
+
+       }
+
+    </script>
+</body>
+</html>

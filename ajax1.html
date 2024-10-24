@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX 1</title>
+</head>
+<body>
+    <button id="test">Click ME</button>
+    <p id="text"></p>
+
+<script>
+//  Create Event Listener
+document.getElementById('test').addEventListener('click',loadText);
+
+function loadText(){
+    // Create XHR object
+    
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET','sample1.txt',true);
+
+    xhr.onprogress=function(){
+        console.log('Ready State: ',xhr.readyState);
+    }
+    xhr.onload = function(){
+        console.log("Ready State: ", xhr.readyState);
+        if(this.status==200){
+            document.getElementById('text').innerHTML=this.responseText;
+        }
+        else if(this.status==404){
+            document.getElementById('text').innerHTML = "Not Found";
+        }
+    }
+
+    // xhr.onreadystatechange = function(){
+    //     console.log("Ready State: ",xhr.readyState);
+    //     if(this.readyState==4 && this.status==200){
+    //     }
+    // }
+
+    xhr.send();
+    // console.log(xhr);
+}
+
+</script>
+</body>
+
+</html>
